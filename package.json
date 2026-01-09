@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "homepage": "https://vishalmsk5.github.io/Bhim-Universal-Calculator/",
+  "homepage": "https://vishalmsk5.github.io/Bhim-Universal-Calculator",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
