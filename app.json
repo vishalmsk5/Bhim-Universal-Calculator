@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Bhim-Calculator",
+    "slug": "bhim-calculator",
+    "scheme": "bhim-calculator",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash-image.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "com.bhim.calculator",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "baseUrl": "/Bhim-Universal-Calculator"
+    }
+  }
+}
