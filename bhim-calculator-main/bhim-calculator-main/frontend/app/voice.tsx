@@ -82,7 +82,8 @@ export default function VoicePage() {
    // BACKEND_URL ची खात्री करा: http://127.0.0.1:8000
     //    const response = await axios.post(`${BACKEND_URL}/api/voice`, {
            // const response = await axios.post(${BACKEND_URL}/ai/voice-calculate, {
-     const response = await axios.post(${BACKEND_URL}/ai/voice-calculate, {
+    // const response = await axios.post(${BACKEND_URL}/ai/voice-calculate, {
+      const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
       query: text // फंक्शनमधील 'text' इथे पास करा
         }, {
 
