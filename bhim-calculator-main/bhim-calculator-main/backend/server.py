@@ -90,7 +90,7 @@ async def create_status_check(input: StatusCheckCreate):
     _ = await db.status_checks.insert_one(status_obj.dict())
     return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
+"""@api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
@@ -237,7 +237,60 @@ async def voice_calculate(request: VoiceCalculateRequest):
 
 #@api_router.post("/voice", response_model=VoiceCalculateResponse)
 #async def voice_calculate(request: VoiceCalculateRequest):
- #   query = request.query
+ #   query = request.query"""
+
+@api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
+async def voice_calculate(request: VoiceCalculateRequest):
+    query = request.query.lower()
+    print(f"User Query: {query}")
+
+    try:
+        # शब्दांचे चिन्हांमध्ये रूपांतर
+        query = query.replace("plus", "+").replace("minus", "-")
+        query = query.replace("times", "*").replace("multiplied by", "*")
+        query = query.replace("divided by", "/").replace("into", "*")
+
+        # १. Square Root लॉजिक
+        if "square root" in query:
+            match = re.search(r'\d+', query)
+            if match:
+                res = math.sqrt(float(match.group()))
+                result = f"The square root of {match.group()} is {res}"
+            else: result = "Number not found."
+
+        # २. Factorial लॉजिक
+        elif "factorial" in query:
+            match = re.search(r'\d+', query)
+            if match:
+                res = math.factorial(int(match.group()))
+                result = f"The factorial of {match.group()} is {res}"
+            else: result = "Number not found."
+
+        # ३. Percentage लॉजिक
+        elif "percent" in query or "%" in query:
+            nums = re.findall(r'\d+', query)
+            if ("plus" in query or "+") and len(nums) >= 3:
+                res = float(nums[0]) + (float(nums[1]) / 100 * float(nums[2]))
+                result = f"The answer is {res}"
+            elif len(nums) >= 2:
+                res = (float(nums[1]) / 100) * float(nums[0]) if "of" in query else (float(nums[0]) / 100) * float(nums[1])
+                result = f"The answer is {res}"
+            else: result = "Calculation incomplete."
+
+        # ४. साधी गणिते
+        else:
+            clean_expr = re.sub(r'[^0-9+\-*/.**]', '', query)
+            if clean_expr:
+                result = f"The answer is {eval(clean_expr)}"
+            else:
+                result = f"I heard: '{request.query}'. Please ask like 'square root of 144'."
+
+        return VoiceCalculateResponse(result=result)
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return VoiceCalculateResponse(result="Sorry, I couldn't calculate that.")
+        
   #  print(f"User Query: {query}")
 
    # try:
@@ -452,8 +505,8 @@ async def voice_calculate(request: VoiceCalculateRequest):
 
 """
 
-
-@api_router.post("/voice", response_model=VoiceCalculateResponse)
+@api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
+"""@api_router.post("/voice", response_model=VoiceCalculateResponse)"""
 async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
     print(f"User Query: {query}")
@@ -631,3 +684,5 @@ async def shutdown_db_client():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
