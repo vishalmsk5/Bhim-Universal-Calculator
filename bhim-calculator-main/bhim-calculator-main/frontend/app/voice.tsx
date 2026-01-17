@@ -83,11 +83,20 @@ export default function VoicePage() {
     //    const response = await axios.post(`${BACKEND_URL}/api/voice`, {
            // const response = await axios.post(${BACKEND_URL}/ai/voice-calculate, {
     // const response = await axios.post(${BACKEND_URL}/ai/voice-calculate, {
-      const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
-      query: text // फंक्शनमधील 'text' इथे पास करा
-        }, {
+      //const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
+     // query: text // फंक्शनमधील 'text' इथे पास करा
+       // }, {
 
+const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
+        query: text 
+      }, {
+        timeout: 15000,
+        headers: { 'Content-Type': 'application/json' },
+      });
 
+      const answer = response.data.result;
+      setResult(answer);
+      
    //  const response = await axios.post(`${BACKEND_URL}/api/voice`, { query }, {
  // timeout: 10000,
 //  headers: { 'Content-Type': 'application/json' },
@@ -97,11 +106,11 @@ export default function VoicePage() {
 //const response = await axios.post(`${BACKEND_URL}/api/voice`, {
  // query: text // इथे खात्री करा की तुम्ही युजरने बोललेला 'text' पाठवत आहात
 //}, {
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
-});
-      const answer = response.data.result;
-      setResult(answer);
+ // timeout: 10000,
+  //headers: { 'Content-Type': 'application/json' },
+//});
+    //  const answer = response.data.result;
+  //    setResult(answer);
 
       // Speak the result
       if (await Speech.isSpeakingAsync()) {
