@@ -22,8 +22,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 //const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 //const BACKEND_URL = "http://127.0.0.1:8000"; // PC IP on same WiFi
-//const BACKEND_URL = "https://bhim-universal-calculator.onrender.com/api";
-const BACKEND_URL = "https://bhim-universal-calculator.onrender.com";
+const BACKEND_URL = "https://bhim-universal-calculator.onrender.com/api";
+//const BACKEND_URL = "https://bhim-universal-calculator.onrender.com";
 export default function VoicePage() {
   const router = useRouter();
   const { theme } = useThemeStore();
@@ -90,7 +90,8 @@ export default function VoicePage() {
 
 //const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
     // हे बदलून पहा
-const response = await axios.post(`${BACKEND_URL}/calculate`, {   
+//const response = await axios.post(`${BACKEND_URL}/calculate`, {   
+  const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
       query: text 
       }, {
         timeout: 15000,
