@@ -88,8 +88,10 @@ export default function VoicePage() {
      // query: text // फंक्शनमधील 'text' इथे पास करा
        // }, {
 
-const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
-        query: text 
+//const response = await axios.post(`${BACKEND_URL}/ai/voice-calculate`, {
+    // हे बदलून पहा
+const response = await axios.post(`${BACKEND_URL}/calculate`, {   
+      query: text 
       }, {
         timeout: 15000,
         headers: { 'Content-Type': 'application/json' },
