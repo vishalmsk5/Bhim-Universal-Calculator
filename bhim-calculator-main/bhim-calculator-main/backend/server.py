@@ -238,7 +238,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 #@api_router.post("/voice", response_model=VoiceCalculateResponse)
 #async def voice_calculate(request: VoiceCalculateRequest):
  #   query = request.query"""
-"""hi last file aahe
+#hi last file aahe
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
@@ -369,7 +369,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 
 
 # फाईलच्या शेवटी हे तपासा
-"""app.include_router(api_router)  
+app.include_router(api_router)  
 
 if __name__ == "__main__":
     import uvicorn
@@ -379,6 +379,7 @@ if __name__ == "__main__":
 
 
 """
+
 
 @api_router.post("/voice", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
@@ -577,7 +578,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 
 """
 
-
+"""
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
@@ -605,7 +606,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
     except:
         return VoiceCalculateResponse(result=f"Calculation Error. Please try again.")
 
-
+"""
 
 # Currency Converter
 @api_router.post("/currency/convert", response_model=CurrencyConvertResponse)
