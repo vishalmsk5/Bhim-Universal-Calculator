@@ -664,11 +664,17 @@ async def convert_currency(request: CurrencyConvertRequest):
 
 
 # Calculation History
+#@api_router.get("/history")
+#async def get_calculation_history():
+ #   history = await db.calculation_history.find().sort("timestamp", -1).to_list(100)
+  #  return history
+
+
 @api_router.get("/history")
 async def get_calculation_history():
-    history = await db.calculation_history.find().sort("timestamp", -1).to_list(100)
-    return history
-
+    # Database एरर टाळण्यासाठी रिकामी लिस्ट पाठवत आहोत
+    return []
+    
 
 
 
