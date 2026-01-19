@@ -90,12 +90,12 @@ async def create_status_check(input: StatusCheckCreate):
     #_ = await db.status_checks.insert_one(status_obj.dict())
     return status_obj
 
-"""@api_router.get("/status", response_model=List[StatusCheck])
+@api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-
+"""
 # AI Voice Calculator
 
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
@@ -137,6 +137,8 @@ async def voice_calculate(request: VoiceCalculateRequest):
         logger.error(f"Voice calculation error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing calculation: {str(e)}")
 """
+"""
+"""
 
 # AI Voice Calculator
 """
@@ -169,7 +171,8 @@ async def voice_calculate(request: VoiceCalculateRequest):
 app.include_router(api_router)
 
 """
-
+"""
+"""
 
 # AI Voice Calculator
 
@@ -238,7 +241,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 #@api_router.post("/voice", response_model=VoiceCalculateResponse)
 #async def voice_calculate(request: VoiceCalculateRequest):
  #   query = request.query"""
-#hi last file aahe
+#hi last file aahe """
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
@@ -290,8 +293,8 @@ async def voice_calculate(request: VoiceCalculateRequest):
     except Exception as e:
         print(f"Error: {e}")
         return VoiceCalculateResponse(result="Sorry, I couldn't calculate that.")
-        """
-  #  print(f"User Query: {query}")
+        
+   print(f"User Query: {query}")
 
    # try:
         # १. पर्यावरणातून की मिळवा
@@ -367,7 +370,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 #    return VoiceCalculateResponse(result="क्षमस्व, मी हे गणित सोडवू शकलो नाही.")
 
 
-
+"""
 # फाईलच्या शेवटी हे तपासा
 app.include_router(api_router)  
 
@@ -375,10 +378,10 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
 """
-
-
-
 """
+
+
+
 
 
 @api_router.post("/voice", response_model=VoiceCalculateResponse)
@@ -421,6 +424,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
         print(f"AI Error: {ai_err}")
         return VoiceCalculateResponse(result="क्षमस्व, एआय कनेक्ट होऊ शकले नाही.")
 
+"""
 """
 """
 @api_router.post("/voice", response_model=VoiceCalculateResponse)
@@ -506,10 +510,11 @@ async def voice_calculate(request: VoiceCalculateRequest):
 
 """
 """
+"""
 
-@api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
+@api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)"""
 """@api_router.post("/voice", response_model=VoiceCalculateResponse)"""
-async def voice_calculate(request: VoiceCalculateRequest):
+"""async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
     print(f"User Query: {query}")
 
@@ -577,6 +582,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
         return VoiceCalculateResponse(result="चूक झाली, पुन्हा सांगा.")
 
 """
+"""
 
 """
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
@@ -606,7 +612,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
     except:
         return VoiceCalculateResponse(result=f"Calculation Error. Please try again.")
 
-"""
+
 
 # Currency Converter
 @api_router.post("/currency/convert", response_model=CurrencyConvertResponse)
