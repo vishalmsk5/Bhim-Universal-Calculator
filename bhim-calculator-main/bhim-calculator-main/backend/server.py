@@ -87,7 +87,7 @@ async def root():
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.dict()
     status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
+    #_ = await db.status_checks.insert_one(status_obj.dict())
     return status_obj
 
 """@api_router.get("/status", response_model=List[StatusCheck])
@@ -97,7 +97,7 @@ async def get_status_checks():
 
 
 # AI Voice Calculator
-"""
+
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
     try:
@@ -238,7 +238,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
 #@api_router.post("/voice", response_model=VoiceCalculateResponse)
 #async def voice_calculate(request: VoiceCalculateRequest):
  #   query = request.query"""
-
+"""hi last file aahe
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 async def voice_calculate(request: VoiceCalculateRequest):
     query = request.query.lower()
@@ -290,7 +290,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
     except Exception as e:
         print(f"Error: {e}")
         return VoiceCalculateResponse(result="Sorry, I couldn't calculate that.")
-        
+        """
   #  print(f"User Query: {query}")
 
    # try:
@@ -504,6 +504,7 @@ async def voice_calculate(request: VoiceCalculateRequest):
         return VoiceCalculateResponse(result="हे गणित थोडे अवघड आहे, कृपया साध्या भाषेत सांगा.")
 
 """
+"""
 
 @api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
 """@api_router.post("/voice", response_model=VoiceCalculateResponse)"""
@@ -574,7 +575,35 @@ async def voice_calculate(request: VoiceCalculateRequest):
         print(f"Error: {e}")
         return VoiceCalculateResponse(result="चूक झाली, पुन्हा सांगा.")
 
+"""
 
+
+@api_router.post("/ai/voice-calculate", response_model=VoiceCalculateResponse)
+async def voice_calculate(request: VoiceCalculateRequest):
+    query = request.query.lower()
+    
+    # शब्दांना चिन्हांमध्ये बदला
+    clean_query = query.replace("plus", "+").replace("minus", "-").replace("times", "*").replace("divided by", "/")
+    
+    # 'square root' साठी विशेष अट
+    if "square root of" in query:
+        nums = re.findall(r'\d+', query)
+        if nums:
+            num = nums[0]
+            import math
+            return VoiceCalculateResponse(result=f"The square root of {num} is {math.sqrt(float(num))}")
+
+    try:
+        # फक्त आकडे आणि गणिताची चिन्हे निवडा (उदा. 'What is 50 + 100' मधून '50 + 100' घेईल)
+        math_expression = ''.join(c for c in clean_query if c in '0123456789+-*/(). ')
+        
+        if math_expression.strip():
+            calc_result = eval(math_expression)
+            return VoiceCalculateResponse(result=f"The answer is {calc_result}")
+        else:
+            return VoiceCalculateResponse(result=f"I received: '{query}'. Please ask clearly like '50 plus 100'.")
+    except:
+        return VoiceCalculateResponse(result=f"Calculation Error. Please try again.")
 
 
 
@@ -640,8 +669,7 @@ async def get_calculation_history():
     return history
 
 
-# Include the router in the main app
-app.include_router(api_router)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -674,15 +702,22 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 # ३. डेटाबेस शटडाउन इव्हेंट
 @app.on_event("shutdown")
 async def shutdown_db_client():
 #if 'client' in globals():
     client.close()
 
+# Include the router in the main app
+app.include_router(api_router)
 # ४. सर्वात शेवटी 'Main' ब्लॉक
 if __name__ == "__main__":
     import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    
+"""if __name__ == "__main__":
+    import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
+"""
 
